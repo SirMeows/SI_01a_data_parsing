@@ -1,4 +1,5 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.thoughtworks.xstream.XStream;
 
@@ -26,5 +27,12 @@ public class DataParser {
         var mapper = new ObjectMapper(new YAMLFactory());
         Person person = mapper.readValue(new File(filepath), Person.class);
         System.out.println("Person object from YAML:"+person);
+    }
+    public void parseCSV(String filePath) throws IOException {
+        var csvMapper = new CsvMapper();
+        var schema = csvMapper.schemaFor(Person.class).withHeader();
+        var reader = csvMapper.readerFor(Person.class).with(schema);
+        var person =  reader.<Person>readValues(new File(filePath)).next();
+        System.out.println("Person object from CSV:"+person);
     }
 }

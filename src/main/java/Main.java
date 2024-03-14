@@ -3,10 +3,12 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         DataParser dataParser = new DataParser();
+        var dir = "src/main/resources/";
         try {
-            dataParser.parseXML("src/main/resources/me.xml");
-            dataParser.parseJSON("src/main/resources/me.json");
-            dataParser.parseYAML("src/main/resources/me.yaml");
+            dataParser.parseXML(dir + "me.xml");
+            dataParser.parseJSON(dir + "/me.json");
+            dataParser.parseYAML(dir + "me.yaml");
+            dataParser.parseCSV(dir + "me.csv");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

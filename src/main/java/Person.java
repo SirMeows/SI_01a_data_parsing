@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import lombok.*;
 
@@ -9,6 +10,7 @@ import java.util.List;
 @Setter
 @ToString
 @XStreamAlias("person")
+@JsonPropertyOrder({"name", "hobbies"}) // Used to read csv in correct order
 public class Person {
     @XStreamAlias("Name")
     private String name;
